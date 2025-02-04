@@ -84,7 +84,7 @@
           
 
                 <!-- Registration Form -->
-                <form method="POST" action="/login">
+                <form method="POST" action="/signup">
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                             <i class="fas fa-user mr-2"></i>Username

@@ -8,5 +8,5 @@ $router->get('/signup', [AuthController::class, 'showSignupPage']);
 $router->post('/signup', [AuthController::class, 'signup']);
 $router->get('/user/dashboard', [AuthController::class, 'dashboard']);
 $router->get('/admin/dashboard', [AuthController::class, 'dashboard']);
-
+$router->get('/studentManage', [AuthController::class, 'users']);
 $router->get('/logout', [AuthController::class, 'logout']);
