@@ -73,16 +73,21 @@ class AuthController {
     }
  
     public function dashboard() {
-        if (!AuthService::isAuthenticated() || !AuthService::hasRole('student')) {
+        if (!AuthService::isAuthenticated()){
             header("Location: /login");
             exit;
+        } 
+        if(AuthService::hasRole('student')) {
+            include __DIR__ . '/../Views/user/dashboard.php';
         }
-        include __DIR__ . '/../Views/user/dashboard.php';
+        if(AuthService::hasRole('admin')) {
+            include __DIR__ . '/../Views/admin/dashboard.php';
+        }
     }
 
     public function logout() {
         AuthService::logout();
-        header("Location: /login");
+        include __DIR__ . '/../Views/user/login.php';
         exit;
     }
 }

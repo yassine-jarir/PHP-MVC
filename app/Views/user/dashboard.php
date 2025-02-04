@@ -1,17 +1,180 @@
+<?php
+// require_once 'config/config.php';
+// require_once 'classes/User.php';
+// require_once 'classes/CourseText.php';
+// require_once 'classes/CourseVideo.php';
+use App\Services\AuthService;
+$userRole = AuthService::isAuthenticated();
+ 
+// session_start();
+
+// $database = Database::getInstance();
+// $db = $database->connect();
+// $course = new CourseText($db);
+// $course = new CourseVideo($db);
+
+// $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// $category = isset($_GET['category']) ? $_GET['category'] : null;
+// $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// // Get all categories
+// $stmt = $db->query("SELECT * FROM categories ORDER BY name");
+// $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// // Get courses based on search, category, and pagination
+// if ($search) {
+//     $courses = $course->searchCourses($search);
+// } elseif ($category) {
+//     $courses = $course->getCoursesByCategory($category, $page);
+// } else {
+//     $courses = $course->getAllCourses($page);
+// }
+// ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youdemy - Online Learning Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <h1>Welcome to the Student Dashboard</h1>
-    <h2>Available Courses:</h2>
-    <ul>
-        <?php foreach ($courses as $course): ?>
-            <li><?= $course['title'] ?> - <?= $course['description'] ?></li>
-        <?php endforeach; ?>
-    </ul>
-    <!-- <a href="/logout">Logout</a> -->
+<body class="bg-gray-50">
+    <!-- Enhanced Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.php" class="flex items-center space-x-3">
+                        <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+                        <span class="font-bold text-xl text-gray-800">Youdemy</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <?php if(!$userRole['role'] == "student"): ?>
+                        <a href="pages/login.php" class="text-gray-600 hover:text-blue-600">Login</a>
+                        <a href="pages/register.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Start Learning</a>
+                    <?php else: ?>
+                        <a href="pages/dashboard.php" class="text-gray-600 hover:text-blue-600">
+                        <?php $userRole['username'] ?> </a>
+                        <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Logout</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <div class="pt-20 bg-gradient-to-r from-indigo-800 to-purple-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Learn Skills for Your Future Career</h1>
+                    <p class="text-xl mb-8">Access over 1000+ courses from professional instructors in design, development, and more.</p>
+                    <div class="space-x-4">
+                        <a href="#courses" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">Explore Courses</a>
+                        <a href="#" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">Learn More</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" alt="Online Learning" class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Features Section -->
+     <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Choose Youdemy?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <i class="fas fa-laptop-code text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Expert Instructors</h3>
+                    <p class="text-gray-600">Learn from industry professionals with years of experience.</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-clock text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Learn at Your Pace</h3>
+                    <p class="text-gray-600">Access course content 24/7 and learn on your schedule.</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-certificate text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Certificates</h3>
+                    <p class="text-gray-600">Earn certificates upon completion to showcase your skills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Courses Section -->
+<div id="courses" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Explore Our Courses</h2>
+            <p class="text-gray-600">Discover the perfect course to advance your skills</p>
+        </div>
+
+        <!-- Search Form -->
+        <form action="index.php" method="GET" class="mb-8">
+            <div class="flex gap-4">
+                <input type="text" name="search" placeholder="Search for courses..." value="<?php echo htmlspecialchars($search); ?>"
+                       class="flex-grow shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded transition duration-300">
+                    Search
+                </button>
+            </div>
+        </form>
+
+        <!-- Category Buttons -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4">Categories</h3>
+            <div class="flex flex-wrap gap-2">
+                <a href="index.php" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition duration-300">
+                    All Courses
+                </a>
+                <?php foreach ($categories as $cat): ?>
+                    <a href="index.php?category=<?php echo urlencode($cat['id']); ?>" 
+                       class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition duration-300 <?php echo $category == $cat['id'] ? 'bg-blue-600 text-white' : ''; ?>">
+                        <?php echo htmlspecialchars($cat['name']); ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <?php if (empty($courses)): ?>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-8" role="alert">
+                <p>No courses found. Try a different search term or category.</p>
+            </div>
+        <?php endif; ?>
+     <!-- Course Grid -->
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php foreach($courses as $course): ?>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="<?php echo htmlspecialchars($course['title']); ?>" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2"><?php echo htmlspecialchars($course['title']); ?></h2>
+                        <p class="text-gray-600 mb-4"><?php echo htmlspecialchars(substr($course['description'], 0, 100)) . '...'; ?></p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie text-blue-600 mr-2"></i>
+                                <span class="text-sm text-gray-500">By <?php echo htmlspecialchars($course['teacher_name']); ?></span>
+                            </div>
+                            <a href="<?php echo isset($_SESSION['user_id']) ? 'pages/course.php?id=' . $course['id'] : 'pages/login.php?redirect=course'; ?>" 
+                               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                                View Course
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>     
+         <!-- Pagination -->
+         <?php if (!$search && !$category): ?>
+            <div class="mt-8 flex justify-center">
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?php echo $page - 1; ?>" class="mx-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">Previous</a>
+                <?php endif; ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="mx-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">Next</a>
+            </div>
+        <?php endif; ?>
+    </div>
+   
 </body>
 </html>

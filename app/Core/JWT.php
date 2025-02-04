@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 
 class JWTHelper
 {
-    private static $secretKey = 'your_secret_key_here';  
+    private static $secretKey = '12312Yassine1234';  
 
     public static function generateToken($data)
     {
