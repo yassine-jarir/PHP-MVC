@@ -87,7 +87,7 @@
                         <i class="fas fa-envelope mr-2"></i>Email
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           id="email" type="email" name="username" required placeholder="Enter your email">
+                           id="email" type="email" name="email" required placeholder="Enter your email">
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
