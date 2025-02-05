@@ -4,9 +4,9 @@ use PDO;
 
 class Database {
     private static $host = 'localhost';
-    private static $dbname = 'youdemyv2';
+    private static $dbname = 'youdemyV2';
     private static $user = 'postgres';  
-    private static $pass = 'localhost'; 
+    private static $pass = 'postgres'; 
     private static $connection;
 
     public static function getConnection() {

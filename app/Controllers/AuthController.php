@@ -21,14 +21,14 @@ class AuthController {
 
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
     
-             $user = $this->userModel->validateUser($username, $password);
+             $user = $this->userModel->validateUser($email, $password);
     
             if ($user) {
                 $role = $user['role'];
-                $userData = ['username' => $username, 'role' => $role];
+                $userData = ['email' => $email, 'role' => $role];
                 $jwt = AuthService::createToken($userData);
     
                  setcookie("jwt", $jwt, time() + 3600, "/", "", false, true);  
@@ -47,7 +47,7 @@ class AuthController {
     
      public function signup() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
             
              $existingUser = $this->userModel->getUserByUsername($username);
@@ -90,4 +90,11 @@ class AuthController {
         include __DIR__ . '/../Views/user/login.php';
         exit;
     }
+    public function users(){
+        $fetchAllUsers = $this->userModel->getAllCourses();
+        // print_r($fetchAllUsers);
+        include __DIR__ . '/../Views/admin/users.php';
+        return $fetchAllUsers;
+        exit;
+    }getAllCourses
 }

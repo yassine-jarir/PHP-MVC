@@ -1,5 +1,4 @@
 <?php
-
 // require_once '../config/config.php';
 // require_once '../classes/Admin.php';
 
@@ -10,7 +9,7 @@
 //     exit;
 // }
 
-// $database = Database::getInstance();  
+// $database = Database::getInstance();
 // $db = $database->connect();
 // $admin = new Admin($db);
 
@@ -19,13 +18,17 @@
 // // Handle user actions
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     if (isset($_POST['toggle_status'])) {
-//         $admin->toggleUserStatus($_POST['user_id']);      
-//     } elseif (isset($_POST['verify_teacher'])) {      
-//         $admin->verifyTeacher($_POST['user_id']);   
+//         $admin->toggleUserStatus($_POST['user_id']);
+//     } elseif (isset($_POST['verify_teacher'])) {
+//         $admin->verifyTeacher($_POST['user_id']);
 //     }
 //     header('Location: users.php');
 //     exit;
 // }
+
+// 
+
+ $user = $fetchAllUsers;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +45,7 @@
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
                 <div class="flex space-x-7">
-                    <a href="../pages/dashboard.php" class="flex items-center py-4 px-2">
+                    <a href="admin/dashboard" class="flex items-center py-4 px-2">
                         <span class="font-semibold text-gray-500 text-lg">← Back to Dashboard</span>
                     </a>
                 </div>
@@ -52,7 +55,7 @@
 
     <!-- Main Content -->
     <div class="max-w-6xl mx-auto px-4">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">User Management</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Student Management</h1>
 
         <!-- Success and Error Messages -->
         <?php if (isset($_SESSION['success_message'])): ?>
@@ -77,39 +80,21 @@
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Username</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Role</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+                         <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($fetchAllUsers as $user): ?>
                         <tr class="hover:bg-gray-50 transition duration-200">
                             <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($user['username']); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($user['email']); ?></td>
                             <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($user['role']); ?></td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $user['is_active'] ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'; ?>">
-                                    <?php echo $user['is_active'] ? 'Active' : 'Inactive'; ?>
-                                </span>
-                            </td>
+                             
                             <td class="px-6 py-4 whitespace-nowrap">   
-                                <!-- Toggle Status Button -->
-                                <form method="POST" class="inline-block">
-                                    <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                                    <button type="submit" name="toggle_status" class="text-sm text-blue-500 hover:text-blue-700 mr-2">
-                                        <i class="fas fa-power-off"></i> <?php echo $user['is_active'] ? 'Deactivate' : 'Activate'; ?>
-                                    </button>
-                                </form>
+                              
+                              
 
-                                <!-- Verify Teacher Button -->
-                                <?php if ($user['role'] === 'teacher' && !$user['is_verified']): ?>
-                                    <form method="POST" class="inline-block mr-2">
-                                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                                        <button type="submit" name="verify_teacher" class="text-sm text-green-500 hover:text-green-700">
-                                            <i class="fas fa-check-circle"></i> Verify Teacher
-                                        </button>
-                                    </form>
-                                <?php endif; ?>
+                               
 
                                 <!-- Delete Button -->
                                 <button onclick="confirmDelete(<?php echo $user['id']; ?>)" class="text-sm text-red-500 hover:text-red-700">
