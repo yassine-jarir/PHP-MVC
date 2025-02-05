@@ -11,7 +11,4 @@ $router->get('/admin/dashboard', [AuthController::class, 'dashboard']);
 $router->get('/studentManage', [AuthController::class, 'users']);
 
 $router->get('/Course', [AuthController::class, 'getAllCourses']);
-
-
-
 $router->get('/logout', [AuthController::class, 'logout']);

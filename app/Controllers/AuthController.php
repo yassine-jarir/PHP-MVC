@@ -92,9 +92,9 @@ class AuthController {
     }
     public function users(){
         $fetchAllUsers = $this->userModel->getAllCourses();
-        // print_r($fetchAllUsers);
+         
         include __DIR__ . '/../Views/admin/users.php';
         return $fetchAllUsers;
         exit;
-    }getAllCourses
+    } 
 }
