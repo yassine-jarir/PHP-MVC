@@ -96,5 +96,5 @@ class AuthController {
         include __DIR__ . '/../Views/admin/users.php';
         return $fetchAllUsers;
         exit;
-    }
+    }getAllCourses
 }

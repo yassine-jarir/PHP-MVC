@@ -84,7 +84,7 @@ if (!$userRole === 'admin') {
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                     <div class="text-center">
                         <i class="fas fa-tags text-5xl text-purple-500 mb-4"></i>
-                        <h2 class="text-xl font-semibold mb-4">Course Management</h2>
+                        <h2 class="text-xl font-semibold mb-4">Categories Management</h2>
                         <a href="../admin/categories.php" class="text-blue-500 hover:text-blue-700">Manage Categories →</a>
                     </div>
                 </div>
@@ -101,15 +101,10 @@ if (!$userRole === 'admin') {
                     <div class="text-center">
                         <i class="fas fa-book text-5xl text-green-500 mb-4"></i>
                         <h2 class="text-xl font-semibold mb-4">Courses Management</h2>
-                        <a href="../admin/valider-cours.php" class="text-blue-500 hover:text-blue-700">Validate Courses →</a>
+                        <a href="/Course" class="text-blue-500 hover:text-blue-700">Validate Courses →</a>
                     </div>
                 </div>
             </div>
-         
-           
-      
     </div>
-
-
 </body>
 </html>
