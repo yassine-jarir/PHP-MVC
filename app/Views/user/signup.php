@@ -1,8 +1,8 @@
 <?php
 // require_once '../config/config.php';
 // require_once '../classes/Student.php'; // Importer la classe Student
-// require_once '../classes/Teacher.php'; // Importer la classe Teacher
-// require_once '../classes/Admin.php'; // Importer la classe Admin
+// require_once '../classes/Teacher.php'; // Importer la classe Teacher     
+// require_once '../classes/Admin.php'; // Importer la classe Admin     
 
 // session_start();
 
@@ -43,12 +43,12 @@
 //                 if ($user->register($username, $email, $password, $role)) {
 //                     $success = 'Registration successful! Please login.';
 //                 } else {
-//                     $error = 'Registration failed';
+//                     $error = 'Registration failed';      
 //                 }
 //             }
 //         } catch (PDOException $e) {
-//             $error = 'Email or username already exists';
-//         }
+//             $error = 'Email or username already exists';     
+//         }      
 //     }
 // }
 // ?>
@@ -84,20 +84,20 @@
           
 
                 <!-- Registration Form -->
-                <form method="POST" action="/login">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                <form method="POST" action="/signup">
+                    <!-- <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="usernames">
                             <i class="fas fa-user mr-2"></i>Username
                         </label>
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               id="username" type="text" name="username" required placeholder="Enter your username">
-                    </div>
+                               id="username" type="text" name="usernames" required placeholder="Enter your username">
+                    </div> -->
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                             <i class="fas fa-envelope mr-2"></i>Email
                         </label>
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               id="email" type="email" name="email" required placeholder="Enter your email">
+                               id="email" type="email" name="username" required placeholder="Enter your email">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -129,7 +129,7 @@
                 <p class="text-center mt-4 text-gray-600">
                     Already have an account? <a href="login" class="text-blue-500 hover:text-blue-700 font-semibold">Login</a>
                 </p>
-            </div>
+            </div>     
         </div>
     </div>
 </body>
